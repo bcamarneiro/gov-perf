@@ -23,12 +23,12 @@ const LandingPage = () => {
 
       {!isLoggingIn && (
         <nav className="w-full flex flex-row gap-5 items-center justify-center bg-neutral-1 p-4">
+          <Link to="/initiatives">Initiatives</Link>
           {!isLoggedIn && (
             <button className="cursor-pointer" type="button" onClick={login}>
-              Login
+              Login (🤷‍♂️ pointless)
             </button>
           )}
-          {isLoggedIn && <Link to="/initiatives">Initiatives</Link>}
           {isLoggedIn && (
             <Link onClick={logout} to="#">
               Logout

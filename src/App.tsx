@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+// @ts-ignore because ProtectedRoute may be useful in the future
 import ProtectedRoute from '@components/ProtectedRoute/ProtectedRoute';
 import { useAppSettingsStore } from '@store/useAppSettingsStore';
 import { cn } from '@utils/cn';
@@ -23,6 +24,15 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
+        <Route path="initiatives" element={<InitiativesPage />}>
+          <Route index element={<InitiativeList />} />
+          <Route
+            path=":selectedInitiativeId/details"
+            element={<InitiativeDetails />}
+          />
+        </Route>
+
+        {/* Protected Route example
         <Route element={<ProtectedRoute />}>
           <Route path="initiatives" element={<InitiativesPage />}>
             <Route index element={<InitiativeList />} />
@@ -31,7 +41,7 @@ const App = () => {
               element={<InitiativeDetails />}
             />
           </Route>
-        </Route>
+        </Route> */}
 
         <Route path="*" element={<FourOFour />} />
       </Routes>

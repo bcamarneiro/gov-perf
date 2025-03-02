@@ -14,6 +14,7 @@ const LandingPage = () => {
 
       <nav className="w-full flex flex-row gap-5 items-center justify-center bg-neutral-1 p-4">
         <Link to="/initiatives">Initiatives</Link>
+        <Link to="/docs">Docs</Link>
       </nav>
     </>
   );

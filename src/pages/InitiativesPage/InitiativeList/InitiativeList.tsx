@@ -1,5 +1,5 @@
 import useInitiatives from '@/services/initiatives/useInitiatives';
-import { TextField } from '@radix-ui/themes';
+import { Button, TextField } from '@radix-ui/themes';
 import { Accordion } from 'radix-ui';
 import { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
@@ -26,15 +26,23 @@ const InitiativeList = () => {
       <Accordion.Root type="single" collapsible>
         <Accordion.Item value="details">
           <Accordion.Header>
-            <Accordion.Trigger>{'> Details'}</Accordion.Trigger>
+            <Accordion.Trigger>
+              <Button>{'> Details'}</Button>
+            </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            <ul className="grid grid-cols-3">
-              <li>{`total: ${metadata.total}`}</li>
+            <ul className="grid grid-cols-3 text-sm">
+              <li>
+                <span className="text-neutral-11">total: </span>
+                <span className="font-bold">{metadata.total}</span>
+              </li>
               {Object.entries(metadata?.totalByFase ?? {}).map(
                 ([key, value]) => {
                   return metadata.fasesList ? (
-                    <li key={key}>{`${metadata.fasesList[key]}: ${value}`}</li>
+                    <li key={key}>
+                      <span className="text-neutral-11">{`${metadata.fasesList[key]}:`}</span>
+                      <span className="font-bold">{value}</span>
+                    </li>
                   ) : null;
                 },
               )}

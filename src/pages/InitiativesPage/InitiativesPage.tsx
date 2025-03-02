@@ -1,7 +1,7 @@
 import Button from '@/components/ui/Button/Button';
 import ChevronBack from '@/components/ui/Icons/ChevronBack';
 import { useAppSettingsStore } from '@store/useAppSettingsStore';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
 import './InitiativesPage.css';
 

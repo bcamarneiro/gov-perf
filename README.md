@@ -136,6 +136,24 @@ The project uses GitHub Actions for continuous integration. The workflow runs te
 
 Contributions are made by individuals, not by the organizations they may be associated with.
 
-## License
+## 📜 License & Usage
 
-This project is licensed under the GNU General Public License v3.0
+This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** license. This means:
+
+- ✅ **You are free to:**
+
+  - Share - Copy and redistribute the material in any medium or format.
+  - Adapt - Remix, transform, and build upon the material.
+
+- ❗ **Under the following conditions:**
+  - **Attribution** - You must give appropriate credit to all contributors, provide a link to the license, and indicate if changes were made.
+  - **NonCommercial** - You may not use the material for commercial purposes.
+  - **ShareAlike** - If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
+
+For full details, see the [official CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+## 🏛 Political Neutrality
+
+This project is **independent and not affiliated with any political party**. Contributions from all parties, organizations, or individuals are welcome as long as they align with the principles of open data and transparency.
+
+While some contributors may have political affiliations, **this project does not endorse any party or ideology**. Contributions should be made in the spirit of data integrity and public interest.

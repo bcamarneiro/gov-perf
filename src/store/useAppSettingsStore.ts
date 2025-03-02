@@ -16,7 +16,7 @@ export const useAppSettingsStore = create<AppSettings>()(
       setLeftSidebarExpanded: (expanded: boolean) =>
         set({ leftSidebarExpanded: expanded }),
 
-      theme: 'dark',
+      theme: 'light',
       setTheme: (theme: 'light' | 'dark') => set({ theme }),
     }),
     {

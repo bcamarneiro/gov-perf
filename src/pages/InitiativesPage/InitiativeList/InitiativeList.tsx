@@ -1,5 +1,5 @@
 import useInitiatives from '@/services/initiatives/useInitiatives';
-import { Button, TextField } from '@radix-ui/themes';
+import { Button, Table, TextField } from '@radix-ui/themes';
 import { Accordion } from 'radix-ui';
 import { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
@@ -63,27 +63,42 @@ const InitiativeList = () => {
         </TextField.Root>
       </div>
 
-      {filteredInitiatives.length === 0 ? (
-        <p className="text-gray-500">
-          No initiatives found matching your filter.
-        </p>
-      ) : (
-        <ul className="space-y-2">
-          {filteredInitiatives.map((initiative) => {
-            return (
-              <li key={initiative.IniId} className="flex flex-row gap-1.5">
-                <span>{initiative.latestEvent.Fase.trim()}</span>
-                <Link
-                  to={`/initiatives/${initiative.IniId}/details`}
-                  className="block text-blue-600 hover:underline"
-                >
-                  {`- ${initiative.IniTitulo}`}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <Table.Root>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Fase</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Actions</Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {filteredInitiatives.length === 0 ? (
+            <p className="text-gray-500">
+              No initiatives found matching your filter.
+            </p>
+          ) : (
+            filteredInitiatives.map((initiative) => {
+              return (
+                <Table.Row key={initiative.IniId}>
+                  <Table.RowHeaderCell>{initiative.IniNr}</Table.RowHeaderCell>
+                  <Table.Cell>{initiative.latestEvent.Fase.trim()}</Table.Cell>
+                  <Table.Cell>{initiative.IniTitulo}</Table.Cell>
+                  <Table.Cell>
+                    <Link
+                      to={`/initiatives/${initiative.IniId}/details`}
+                      className="block text-blue-600 hover:underline"
+                    >
+                      Details
+                    </Link>
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })
+          )}
+        </Table.Body>
+      </Table.Root>
     </div>
   );
 };

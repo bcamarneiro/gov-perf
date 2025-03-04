@@ -1,10 +1,11 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_PRIVY_APP_ID: string;
-  readonly VITE_PRIVY_CLIENT_ID: string;
+  readonly VITE_SAMPLE_ENV_VAR: string;
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare module '*.md';

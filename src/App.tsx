@@ -6,6 +6,7 @@ import { useAppSettingsStore } from '@store/useAppSettingsStore';
 import { cn } from '@utils/cn';
 
 import FourOFour from './components/FourOFour/FourOFour';
+import AboutPage from './pages/AboutPage/AboutPage';
 import DocsPage from './pages/DocsPage/DocsPage';
 import InitiativesDocs from './pages/DocsPage/InitiativesDocs/InitiativesDocs';
 import InitiativeDetails from './pages/InitiativesPage/InitiativeDetails/InitiativeDetails';
@@ -37,6 +38,8 @@ const App = () => {
         <Route path="docs" element={<DocsPage />}>
           <Route index element={<InitiativesDocs />} />
         </Route>
+
+        <Route path="about" element={<AboutPage />} />
 
         {/* Protected Route example
         <Route element={<ProtectedRoute />}>

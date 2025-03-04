@@ -21,5 +21,13 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "./src/utils/"),
     },
   },
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), {
+    name: "markdown-loader",
+    transform(code, id) {
+      if (id.slice(-3) === ".md") {
+        // For .md files, get the raw content
+        return `export default ${JSON.stringify(code)};`;
+      }
+    }
+  }],
 });

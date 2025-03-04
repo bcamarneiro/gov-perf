@@ -297,3 +297,310 @@
   --font-sans: "Montserrat", "sans-serif";
   --font-serif: "Merriweather", "serif";
 }
+
+/* Typography System
+ * A comprehensive set of typography styles that complement the existing design system
+ */
+
+/* Base Typography */
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: var(--sizing-md);
+  color: var(--color-neutral-12);
+  background-color: var(--color-neutral-1);
+  font-family: var(--font-sans);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-neutral-12);
+}
+
+h1 {
+  font-size: var(--sizing-5xl);
+  margin-bottom: var(--spacing-6);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--sizing-4xl);
+  margin-bottom: var(--spacing-5);
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--sizing-3xl);
+  margin-bottom: var(--spacing-4);
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-size: var(--sizing-2xl);
+  margin-bottom: var(--spacing-3);
+}
+
+h5 {
+  font-size: var(--sizing-xl);
+  margin-bottom: var(--spacing-2);
+}
+
+h6 {
+  font-size: var(--sizing-lg);
+  margin-bottom: var(--spacing-2);
+}
+
+/* Paragraphs */
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-4);
+  font-size: var(--sizing-md);
+  line-height: 1.6;
+  font-family: var(--font-sans);
+}
+
+.lead {
+  font-size: var(--sizing-lg);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-6);
+}
+
+.small {
+  font-size: var(--sizing-sm);
+  line-height: 1.5;
+}
+
+.tiny {
+  font-size: var(--sizing-xs);
+  line-height: 1.4;
+}
+
+/* Links */
+a {
+  color: var(--color-accent-9);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-10);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-accent-7);
+  outline-offset: 2px;
+}
+
+/* Lists */
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: var(--spacing-4);
+  padding-left: var(--spacing-6);
+}
+
+li {
+  margin-bottom: var(--spacing-2);
+}
+
+/* Text Utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/* Font Families */
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Font Weights */
+.font-thin {
+  font-weight: 100;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+/* Text Colors */
+.text-neutral-1 {
+  color: var(--color-neutral-1);
+}
+.text-neutral-12 {
+  color: var(--color-neutral-12);
+}
+.text-accent {
+  color: var(--color-accent-9);
+}
+.text-success {
+  color: var(--color-success-9);
+}
+.text-warning {
+  color: var(--color-warning-9);
+}
+.text-danger {
+  color: var(--color-danger-9);
+}
+
+/* Text Transforms */
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* Special Text Elements */
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--spacing-5);
+  border-left: 4px solid var(--color-neutral-6);
+  font-style: italic;
+  color: var(--color-neutral-11);
+  font-family: var(--font-serif);
+}
+
+code {
+  font-family: monospace;
+  background-color: var(--color-neutral-3);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: var(--color-neutral-3);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--spacing-4);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Serif Text */
+.serif {
+  font-family: var(--font-serif);
+}
+
+.serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+/* Dark Mode Adjustments */
+.dark body {
+  color: var(--color-neutral-12);
+}
+
+.dark a {
+  color: var(--color-accent-9);
+}
+
+.dark a:hover {
+  color: var(--color-accent-8);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: calc(var(--sizing-4xl) * 0.9);
+  }
+
+  h2 {
+    font-size: calc(var(--sizing-3xl) * 0.95);
+  }
+
+  h3 {
+    font-size: var(--sizing-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: calc(var(--sizing-3xl) * 1.1);
+  }
+
+  h2 {
+    font-size: var(--sizing-2xl);
+  }
+
+  h3 {
+    font-size: var(--sizing-xl);
+  }
+
+  .lead {
+    font-size: var(--sizing-md);
+  }
+}

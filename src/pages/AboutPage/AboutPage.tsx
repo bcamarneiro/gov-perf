@@ -1,13 +1,16 @@
 import Button from '@/components/ui/Button/Button';
 import ChevronBack from '@/components/ui/Icons/ChevronBack';
 import { useAppSettingsStore } from '@store/useAppSettingsStore';
-import { Link, Outlet } from 'react-router-dom';
+import Markdown from 'react-markdown';
+import { Link } from 'react-router-dom';
+import remarkGfm from 'remark-gfm';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
-import './DocsPage.css';
+import './AboutPage.css';
+import aboutPtMd from './about-pt.md';
 
 // TODO: Needs implementation
 
-const DocsPage: React.FC = () => {
+const AboutPage: React.FC = () => {
   const { leftSidebarExpanded, setLeftSidebarExpanded } = useAppSettingsStore();
 
   return (
@@ -26,16 +29,18 @@ const DocsPage: React.FC = () => {
           </Button>
 
           <div className="h-[32px] grow flex flex-row items-center gap-3">
-            <Link to="/docs">Docs</Link>
+            <Link to="/about">About</Link>
           </div>
         </nav>
 
         <main className="w-full h-full overflow-y-auto overflow-x-hidden">
-          <Outlet />
+          <div className="max-w-2xl m-5">
+            <Markdown remarkPlugins={[remarkGfm]}>{aboutPtMd}</Markdown>
+          </div>
         </main>
       </div>
     </div>
   );
 };
 
-export default DocsPage;
+export default AboutPage;

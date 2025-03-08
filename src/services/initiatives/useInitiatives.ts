@@ -4,9 +4,13 @@ import { useCallback, useMemo } from 'react';
 type Event = Fase & {
   EvtId: string;
   DataFase: string | Date;
+  Observacoes?: string;
+  Responsavel?: string;
+  Estado?: string;
+  DataPrevista?: string;
 };
 
-type Initiative = {
+export type Initiative = {
   IniId: string;
   IniNr: string;
   IniTitulo: string;
@@ -67,15 +71,14 @@ export const useInitiatives = () => {
     if (!parsedData.length) return {};
 
     const fasesList: Record<string, string> = {};
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    parsedData.forEach((initiative) => {
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      initiative.IniEventos.forEach((event) => {
-        if (fasesList[event.CodigoFase]) return;
 
+    // Using for...of instead of forEach
+    for (const initiative of parsedData) {
+      for (const event of initiative.IniEventos) {
+        if (fasesList[event.CodigoFase]) continue;
         fasesList[event.CodigoFase] = event.Fase;
-      });
-    });
+      }
+    }
 
     const totalByFase = parsedData.reduce(
       (acc: Record<string, number>, initiative) => {
@@ -97,7 +100,7 @@ export const useInitiatives = () => {
   }, [parsedData]);
 
   return {
-    initiatives: parsedData || [],
+    initiatives: parsedData,
     metadata,
     isLoading: isFetching,
     isError,
@@ -105,5 +108,3 @@ export const useInitiatives = () => {
     error,
   };
 };
-
-export default useInitiatives;

@@ -1,5 +1,3 @@
-import Button from '@/components/ui/Button/Button';
-import AddCircle from '@/components/ui/Icons/AddCircle';
 import GovPerfLogo from '@/components/ui/Icons/GovPerfLogo';
 import Sidebar from '@/components/ui/Sidebar/Sidebar';
 import { useAppSettingsStore } from '@store/useAppSettingsStore';
@@ -24,13 +22,6 @@ const LeftSidebar = () => {
             Gov Perf
           </Link>
         </div>
-
-        <Button
-          variant="accent"
-          onClick={() => alert('missing implementation')}
-        >
-          <AddCircle />
-        </Button>
       </div>
     </Sidebar>
   );

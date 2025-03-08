@@ -1,8 +1,10 @@
 interface LoginSuccessParams {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   user: Record<string, any> | null;
   isNewUser: boolean;
   wasAlreadyAuthenticated: boolean;
   loginMethod: string | null;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   loginAccount: Record<string, any> | null;
 }
 

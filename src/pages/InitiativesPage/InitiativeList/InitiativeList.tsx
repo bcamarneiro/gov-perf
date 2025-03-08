@@ -1,23 +1,53 @@
-import useInitiatives from '@/services/initiatives/useInitiatives';
-import { Button, Table, TextField } from '@radix-ui/themes';
+import { useInitiatives } from '@/services/initiatives/useInitiatives';
+import { Table } from '@radix-ui/themes';
 import { Accordion } from 'radix-ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import debounce from 'lodash/debounce';
+import { Spinner } from '@/components/Spinner';
 
 const InitiativeList = () => {
-  const { initiatives, metadata } = useInitiatives();
-  console.log('🚀 ~ InitiativeList ~ metadata:', metadata);
+  const { initiatives, metadata, isLoading, isError, error } = useInitiatives();
   const [filterText, setFilterText] = useState('');
-  const [filteredInitiatives, setFilteredInitiatives] = useState(initiatives);
+  const [debouncedFilterText, setDebouncedFilterText] = useState('');
+
+  // Debounce filter text updates
+  const debouncedSetFilter = useMemo(
+    () => debounce((value: string) => setDebouncedFilterText(value), 300),
+    [],
+  );
 
   useEffect(() => {
-    // Filter initiatives based on the search text
-    const filtered = initiatives.filter((initiative) =>
-      initiative.IniTitulo.toLowerCase().includes(filterText.toLowerCase()),
+    debouncedSetFilter(filterText);
+    return () => {
+      debouncedSetFilter.cancel();
+    };
+  }, [filterText, debouncedSetFilter]);
+
+  // Memoize filtered initiatives
+  const filteredInitiatives = useMemo(() => {
+    return initiatives.filter((initiative) =>
+      initiative.IniTitulo.toLowerCase().includes(
+        debouncedFilterText.toLowerCase(),
+      ),
     );
-    setFilteredInitiatives(filtered);
-  }, [filterText, initiatives]);
+  }, [initiatives, debouncedFilterText]);
+
+  if (isError) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="text-red-600 text-center">
+          <h2 className="text-xl font-bold mb-2">Error loading initiatives</h2>
+          <p>
+            {error instanceof Error
+              ? error.message
+              : 'An unexpected error occurred'}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full flex flex-col p-5 justify-baseline overflow-y-auto overflow-x-hidden">
@@ -27,7 +57,9 @@ const InitiativeList = () => {
         <Accordion.Item value="details">
           <Accordion.Header>
             <Accordion.Trigger>
-              <Button>{'> Details'}</Button>
+              <span className="inline-block px-3 py-2 text-sm font-medium bg-neutral-3 text-neutral-12 rounded hover:bg-neutral-4">
+                {'> Details'}
+              </span>
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
@@ -52,53 +84,73 @@ const InitiativeList = () => {
       </Accordion.Root>
 
       <div className="relative my-4">
-        <TextField.Root
+        <input
+          type="text"
           placeholder="Search the initiatives…"
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
-        >
-          <TextField.Slot>
-            <FaSearch height="16" width="16" />
-          </TextField.Slot>
-        </TextField.Root>
+          className="w-full px-4 py-2 rounded border border-neutral-6 bg-neutral-2"
+          aria-label="Search initiatives"
+        />
+        <FaSearch
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-11"
+          aria-hidden="true"
+        />
       </div>
 
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Fase</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Actions</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <Spinner size="lg" />
+        </div>
+      ) : (
+        <Table.Root>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeaderCell scope="col">#</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell scope="col">Fase</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell scope="col">Title</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell scope="col">
+                Actions
+              </Table.ColumnHeaderCell>
+            </Table.Row>
+          </Table.Header>
 
-        <Table.Body>
-          {filteredInitiatives.length === 0 ? (
-            <p className="text-gray-500">
-              No initiatives found matching your filter.
-            </p>
-          ) : (
-            filteredInitiatives.map((initiative) => {
-              return (
-                <Table.Row key={initiative.IniId}>
-                  <Table.RowHeaderCell>{initiative.IniNr}</Table.RowHeaderCell>
-                  <Table.Cell>{initiative.latestEvent.Fase.trim()}</Table.Cell>
-                  <Table.Cell>{initiative.IniTitulo}</Table.Cell>
-                  <Table.Cell>
-                    <Link
-                      to={`/initiatives/${initiative.IniId}/details`}
-                      className="block text-blue-600 hover:underline"
-                    >
-                      Details
-                    </Link>
-                  </Table.Cell>
-                </Table.Row>
-              );
-            })
-          )}
-        </Table.Body>
-      </Table.Root>
+          <Table.Body>
+            {filteredInitiatives.length === 0 ? (
+              <Table.Row>
+                <Table.Cell colSpan={4} className="text-center text-gray-500">
+                  {debouncedFilterText
+                    ? 'No initiatives found matching your search.'
+                    : 'No initiatives available.'}
+                </Table.Cell>
+              </Table.Row>
+            ) : (
+              filteredInitiatives.map((initiative) => {
+                return (
+                  <Table.Row key={initiative.IniId}>
+                    <Table.RowHeaderCell>
+                      {initiative.IniNr}
+                    </Table.RowHeaderCell>
+                    <Table.Cell>
+                      {initiative.latestEvent.Fase?.trim()}
+                    </Table.Cell>
+                    <Table.Cell>{initiative.IniTitulo}</Table.Cell>
+                    <Table.Cell>
+                      <Link
+                        to={`/initiatives/${initiative.IniId}/details`}
+                        className="block text-blue-600 hover:underline"
+                        aria-label={`View details for initiative ${initiative.IniTitulo}`}
+                      >
+                        Details
+                      </Link>
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              })
+            )}
+          </Table.Body>
+        </Table.Root>
+      )}
     </div>
   );
 };

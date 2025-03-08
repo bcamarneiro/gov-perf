@@ -16,9 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
     env:
-        VITE_PRIVY_APP_ID: 'dry.run'
-        VITE_PRIVY_CLIENT_ID: 'dry.run'
-        PUBLIC_DEV_PORT: 3002
+      PUBLIC_DEV_PORT: 3002
     steps:
       - name: Checkout
         uses: actions/checkout@v4

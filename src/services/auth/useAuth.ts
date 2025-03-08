@@ -1,24 +1,14 @@
-import {
-  type LinkedAccountWithMetadata,
-  type PrivyErrorCode,
-  type User,
-  useLogin,
-  useLogout,
-  usePrivy,
-} from '@privy-io/react-auth';
-import { useState } from 'react';
-
 interface LoginSuccessParams {
-  user: User;
+  user: Record<string, any> | null;
   isNewUser: boolean;
   wasAlreadyAuthenticated: boolean;
   loginMethod: string | null;
-  loginAccount: LinkedAccountWithMetadata | null;
+  loginAccount: Record<string, any> | null;
 }
 
 interface UseAuthProps {
   onLoginSuccess?: (params: LoginSuccessParams) => void;
-  onLoginError?: (error: PrivyErrorCode) => void;
+  onLoginError?: (error: unknown) => void;
   onLogoutSuccess?: () => void;
 }
 
@@ -27,39 +17,31 @@ const useAuth = ({
   onLoginError,
   onLogoutSuccess,
 }: UseAuthProps = {}) => {
-  const privy = usePrivy();
-  const [isPrivyLoggingIn, setIsPrivyLoggingIn] = useState(false);
-
-  const { login } = useLogin({
-    onComplete: (params) => {
-      setIsPrivyLoggingIn(false);
-      onLoginSuccess?.(params);
-    },
-    onError: (error) => {
-      setIsPrivyLoggingIn(false);
-      onLoginError?.(error);
-      console.error('Login failed:', error);
-    },
-  });
-
-  const { logout } = useLogout({
-    onSuccess: () => {
-      onLogoutSuccess?.();
-    },
-  });
-
   const doLogin = async () => {
-    setIsPrivyLoggingIn(true);
-    login();
+    console.log('Logging in...');
+    try {
+      await Promise.resolve(true);
+    } catch (e) {
+      onLoginError?.(e);
+    }
+    onLoginSuccess?.({
+      user: { name: 'John Doe' },
+      isNewUser: false,
+      wasAlreadyAuthenticated: false,
+      loginMethod: 'password',
+      loginAccount: { email: 'john.doe@example.com' },
+    });
   };
 
   const doLogout = async () => {
-    logout();
+    console.log('Logging out...');
+    await Promise.resolve(true);
+    onLogoutSuccess?.();
   };
 
   return {
-    isLoggingIn: !privy.ready || isPrivyLoggingIn,
-    isLoggedIn: privy.ready && privy.authenticated,
+    isLoggingIn: false,
+    isLoggedIn: false,
     logout: doLogout,
     login: doLogin,
   };

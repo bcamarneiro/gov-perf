@@ -4,7 +4,7 @@ A modern React application for government performance tracking and analytics.
 
 ## Overview
 
-Gov-Perf-Frontend is a web application built with React and TypeScript that provides an interface for monitoring and analyzing government performance metrics. The application uses Privy for authentication and is built with modern React patterns and tools.
+Gov-Perf-Frontend is a web application built with React and TypeScript that provides an interface for monitoring and analyzing government performance metrics.
 
 ## Features
 

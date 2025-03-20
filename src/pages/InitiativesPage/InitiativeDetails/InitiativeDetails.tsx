@@ -1,11 +1,11 @@
+import { Spinner } from '@/components/Spinner';
 import {
   type Initiative,
   useInitiatives,
-} from "@/services/initiatives/useInitiatives";
-import { formatDate } from "@/utils/dateUtils";
-import type React from "react";
-import { useParams, Link } from "react-router-dom";
-import { Spinner } from "@/components/Spinner";
+} from '@/services/initiatives/useInitiatives';
+import { formatDate } from '@/utils/dateUtils';
+import type React from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 /**
  * Calculates the duration in days between two dates
@@ -19,7 +19,7 @@ const calcularDuracao = (inicio: string, fim?: string): number => {
 
     // Check if the start date is valid
     if (Number.isNaN(dataInicio.getTime())) {
-      console.error("Data de início inválida:", inicio);
+      console.error('Data de início inválida:', inicio);
       return 0;
     }
 
@@ -27,7 +27,7 @@ const calcularDuracao = (inicio: string, fim?: string): number => {
 
     // Check if the end date is valid
     if (Number.isNaN(dataFim.getTime())) {
-      console.error("Data de fim inválida:", fim);
+      console.error('Data de fim inválida:', fim);
       return 0;
     }
 
@@ -36,7 +36,7 @@ const calcularDuracao = (inicio: string, fim?: string): number => {
 
     return diferencaDias;
   } catch (error) {
-    console.error("Erro ao calcular duração:", error);
+    console.error('Erro ao calcular duração:', error);
     return 0;
   }
 };
@@ -48,7 +48,7 @@ const InitiativeDetails: React.FC = () => {
 
   const { initiatives, isLoading, isError, error } = useInitiatives();
   const initiative = initiatives.find(
-    (initiative: Initiative) => initiative.IniId === selectedInitiativeId
+    (initiative: Initiative) => initiative.IniId === selectedInitiativeId,
   );
 
   if (isLoading) {
@@ -67,7 +67,7 @@ const InitiativeDetails: React.FC = () => {
           <p>
             {error instanceof Error
               ? error.message
-              : "An unexpected error occurred"}
+              : 'An unexpected error occurred'}
           </p>
         </div>
       </div>
@@ -84,12 +84,12 @@ const InitiativeDetails: React.FC = () => {
 
   const currentPhase = initiative.latestEvent.Fase;
   const totalDuration = calcularDuracao(
-    typeof initiative.IniEventos[0].DataFase === "string"
+    typeof initiative.IniEventos[0].DataFase === 'string'
       ? initiative.IniEventos[0].DataFase
       : initiative.IniEventos[0].DataFase.toISOString(),
-    typeof initiative.latestEvent.DataFase === "string"
+    typeof initiative.latestEvent.DataFase === 'string'
       ? initiative.latestEvent.DataFase
-      : initiative.latestEvent.DataFase.toISOString()
+      : initiative.latestEvent.DataFase.toISOString(),
   );
 
   // Find related initiatives (same type or similar title keywords)
@@ -98,8 +98,8 @@ const InitiativeDetails: React.FC = () => {
       if (ini.IniId === initiative.IniId) return false;
       return (
         ini.IniTipo === initiative.IniTipo ||
-        initiative.IniTitulo.split(" ").some((word) =>
-          ini.IniTitulo.toLowerCase().includes(word.toLowerCase())
+        initiative.IniTitulo.split(' ').some((word) =>
+          ini.IniTitulo.toLowerCase().includes(word.toLowerCase()),
         )
       );
     })
@@ -107,7 +107,7 @@ const InitiativeDetails: React.FC = () => {
 
   // Get voting phases
   const votingPhases = initiative.IniEventos.filter((event) =>
-    event.Fase.toLowerCase().includes("votação")
+    event.Fase.toLowerCase().includes('votação'),
   );
 
   return (
@@ -119,8 +119,8 @@ const InitiativeDetails: React.FC = () => {
             #{initiative.IniNr}
           </span>
           <span className="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm">
-            {initiative.IniTipo === "P"
-              ? "Proposta de Lei"
+            {initiative.IniTipo === 'P'
+              ? 'Proposta de Lei'
               : initiative.IniTipo}
           </span>
         </div>
@@ -156,11 +156,11 @@ const InitiativeDetails: React.FC = () => {
               <h3 className="font-medium text-gray-900">Current Status</h3>
               <p className="text-gray-600">
                 This initiative is currently in the "{currentPhase}" phase.
-                {currentPhase.toLowerCase().includes("votação")
+                {currentPhase.toLowerCase().includes('votação')
                   ? " This means it's being voted on by parliament."
-                  : currentPhase.toLowerCase().includes("promulgação")
-                  ? " This means it has been approved and is being prepared to become law."
-                  : " This means it's being reviewed and processed by parliament."}
+                  : currentPhase.toLowerCase().includes('promulgação')
+                    ? ' This means it has been approved and is being prepared to become law.'
+                    : " This means it's being reviewed and processed by parliament."}
               </p>
             </div>
           </div>
@@ -188,10 +188,10 @@ const InitiativeDetails: React.FC = () => {
               <p className="text-gray-600">
                 This initiative has been in process for {totalDuration} days
                 {totalDuration > 180
-                  ? " (which is longer than usual)"
+                  ? ' (which is longer than usual)'
                   : totalDuration < 30
-                  ? " (which is relatively quick)"
-                  : ""}
+                    ? ' (which is relatively quick)'
+                    : ''}
                 .
               </p>
             </div>
@@ -212,9 +212,9 @@ const InitiativeDetails: React.FC = () => {
                 )}
                 <p className="text-sm text-gray-500">
                   {formatDate(
-                    typeof phase.DataFase === "string"
+                    typeof phase.DataFase === 'string'
                       ? phase.DataFase
-                      : phase.DataFase.toISOString()
+                      : phase.DataFase.toISOString(),
                   )}
                 </p>
               </div>
@@ -247,12 +247,12 @@ const InitiativeDetails: React.FC = () => {
               index > 0 ? initiative.IniEventos[index - 1] : null;
             const duration = prevEvent
               ? calcularDuracao(
-                  typeof prevEvent.DataFase === "string"
+                  typeof prevEvent.DataFase === 'string'
                     ? prevEvent.DataFase
                     : prevEvent.DataFase.toISOString(),
-                  typeof event.DataFase === "string"
+                  typeof event.DataFase === 'string'
                     ? event.DataFase
-                    : event.DataFase.toISOString()
+                    : event.DataFase.toISOString(),
                 )
               : 0;
 
@@ -268,7 +268,7 @@ const InitiativeDetails: React.FC = () => {
                   <div className="flex flex-wrap items-baseline gap-3 mb-2">
                     <span className="font-medium">{event.Fase}</span>
                     <span className="text-sm text-neutral-600">
-                      {typeof event.DataFase === "string"
+                      {typeof event.DataFase === 'string'
                         ? formatDate(event.DataFase)
                         : formatDate(event.DataFase.toISOString())}
                     </span>
@@ -286,19 +286,19 @@ const InitiativeDetails: React.FC = () => {
                   <div className="mt-2 space-y-1">
                     {event.Responsavel && (
                       <p className="text-sm text-neutral-600">
-                        <span className="font-medium">Responsible:</span>{" "}
+                        <span className="font-medium">Responsible:</span>{' '}
                         {event.Responsavel}
                       </p>
                     )}
                     {event.Estado && (
                       <p className="text-sm text-neutral-600">
-                        <span className="font-medium">Status:</span>{" "}
+                        <span className="font-medium">Status:</span>{' '}
                         {event.Estado}
                       </p>
                     )}
                     {event.DataPrevista && (
                       <p className="text-sm text-neutral-600">
-                        <span className="font-medium">Expected Date:</span>{" "}
+                        <span className="font-medium">Expected Date:</span>{' '}
                         {formatDate(event.DataPrevista)}
                       </p>
                     )}
@@ -326,8 +326,8 @@ const InitiativeDetails: React.FC = () => {
                     #{related.IniNr}
                   </span>
                   <span className="text-sm text-neutral-600">
-                    {related.IniTipo === "P"
-                      ? "Proposta de Lei"
+                    {related.IniTipo === 'P'
+                      ? 'Proposta de Lei'
                       : related.IniTipo}
                   </span>
                 </div>

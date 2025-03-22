@@ -1,9 +1,9 @@
 import { Spinner } from '@/components/Spinner';
 import { useInitiatives } from '@/services/initiatives/useInitiatives';
 import { formatDate } from '@/utils/dateUtils';
+import * as Accordion from '@radix-ui/react-accordion';
 import { Table } from '@radix-ui/themes';
-import debounce from 'lodash/debounce';
-import { Accordion } from 'radix-ui';
+import { debounce } from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 import {
   FaChevronDown,

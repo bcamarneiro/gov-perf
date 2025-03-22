@@ -13,6 +13,8 @@ import InitiativeDetails from './pages/InitiativesPage/InitiativeDetails/Initiat
 import InitiativeList from './pages/InitiativesPage/InitiativeList/InitiativeList';
 import InitiativesPage from './pages/InitiativesPage/InitiativesPage';
 import LandingPage from './pages/LandingPage/LandingPage';
+import ParliamentList from './pages/ParliamentPage/ParliamentList/ParliamentList';
+import ParliamentPage from './pages/ParliamentPage/ParliamentPage';
 
 const App = () => {
   const { theme } = useAppSettingsStore();
@@ -33,6 +35,10 @@ const App = () => {
             path=":selectedInitiativeId/details"
             element={<InitiativeDetails />}
           />
+        </Route>
+
+        <Route path="parliament" element={<ParliamentPage />}>
+          <Route index element={<ParliamentList />} />
         </Route>
 
         <Route path="docs" element={<DocsPage />}>

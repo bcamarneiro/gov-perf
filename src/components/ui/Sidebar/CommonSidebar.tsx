@@ -1,18 +1,18 @@
-import GovPerfLogo from "@/components/ui/Icons/GovPerfLogo";
-import Sidebar from "@/components/ui/Sidebar/Sidebar";
-import { useAppSettingsStore } from "@store/useAppSettingsStore";
-import { Link, useLocation } from "react-router-dom";
+import GovPerfLogo from '@/components/ui/Icons/GovPerfLogo';
+import Sidebar from '@/components/ui/Sidebar/Sidebar';
+import { useAppSettingsStore } from '@store/useAppSettingsStore';
+import { Link, useLocation } from 'react-router-dom';
 
 const CommonSidebar = () => {
   const { leftSidebarExpanded } = useAppSettingsStore();
   const location = useLocation();
 
   const navigationItems = [
-    { path: "/", label: "Home" },
-    { path: "/initiatives", label: "Initiatives" },
-    { path: "/parliament", label: "Parliament" },
-    { path: "/about", label: "About" },
-    { path: "/docs", label: "Docs" },
+    { path: '/', label: 'Home' },
+    { path: '/initiatives', label: 'Initiatives' },
+    { path: '/parliament', label: 'Parliament' },
+    { path: '/about', label: 'About' },
+    { path: '/docs', label: 'Docs' },
   ];
 
   return (
@@ -36,8 +36,8 @@ const CommonSidebar = () => {
             to={item.path}
             className={`flex items-center px-4 py-2 my-1 text-sm rounded-lg transition-colors ${
               location.pathname === item.path
-                ? "bg-neutral-3 text-neutral-12"
-                : "text-neutral-11 hover:bg-neutral-2 hover:text-neutral-12"
+                ? 'bg-neutral-3 text-neutral-12'
+                : 'text-neutral-11 hover:bg-neutral-2 hover:text-neutral-12'
             }`}
           >
             {item.label}

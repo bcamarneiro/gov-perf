@@ -1,9 +1,9 @@
-import Button from "@/components/ui/Button/Button";
-import ChevronBack from "@/components/ui/Icons/ChevronBack";
-import CommonSidebar from "@/components/ui/Sidebar/CommonSidebar";
-import { useAppSettingsStore } from "@store/useAppSettingsStore";
-import { Link, Outlet } from "react-router-dom";
-import "./InitiativesPage.css";
+import Button from '@/components/ui/Button/Button';
+import ChevronBack from '@/components/ui/Icons/ChevronBack';
+import CommonSidebar from '@/components/ui/Sidebar/CommonSidebar';
+import { useAppSettingsStore } from '@store/useAppSettingsStore';
+import { Link, Outlet } from 'react-router-dom';
+import './InitiativesPage.css';
 
 // TODO: Needs implementation
 
@@ -20,7 +20,7 @@ const InitiativesPage: React.FC = () => {
             variant="neutral"
             onClick={() => setLeftSidebarExpanded(!leftSidebarExpanded)}
           >
-            <span className={`${!leftSidebarExpanded && "rotate-180"}`}>
+            <span className={`${!leftSidebarExpanded && 'rotate-180'}`}>
               <ChevronBack />
             </span>
           </Button>

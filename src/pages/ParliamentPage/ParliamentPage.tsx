@@ -1,21 +1,21 @@
-import { Spinner } from "@/components/Spinner";
-import Button from "@/components/ui/Button/Button";
-import ChevronBack from "@/components/ui/Icons/ChevronBack";
-import { useParliament } from "@/services/parliament/useParliament";
-import { Table } from "@radix-ui/themes";
-import { useAppSettingsStore } from "@store/useAppSettingsStore";
-import { useMemo, useState } from "react";
-import { FaSearch, FaUserTie } from "react-icons/fa";
-import { PieChart } from "react-minimal-pie-chart";
-import { Link, Outlet } from "react-router-dom";
-import CommonSidebar from "@/components/ui/Sidebar/CommonSidebar";
-import "./ParliamentPage.css";
+import { Spinner } from '@/components/Spinner';
+import Button from '@/components/ui/Button/Button';
+import ChevronBack from '@/components/ui/Icons/ChevronBack';
+import CommonSidebar from '@/components/ui/Sidebar/CommonSidebar';
+import { useParliament } from '@/services/parliament/useParliament';
+import { Table } from '@radix-ui/themes';
+import { useAppSettingsStore } from '@store/useAppSettingsStore';
+import { useMemo, useState } from 'react';
+import { FaSearch, FaUserTie } from 'react-icons/fa';
+import { PieChart } from 'react-minimal-pie-chart';
+import { Link, Outlet } from 'react-router-dom';
+import './ParliamentPage.css';
 
 const ParliamentPage: React.FC = () => {
   const { parliament, metadata, isLoading, isError, error } = useParliament();
-  const [filterText, setFilterText] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState<string>("");
-  const [selectedParty, setSelectedParty] = useState<string>("");
+  const [filterText, setFilterText] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('');
+  const [selectedParty, setSelectedParty] = useState<string>('');
   const { leftSidebarExpanded, setLeftSidebarExpanded } = useAppSettingsStore();
 
   // Memoize filtered MPs
@@ -49,23 +49,23 @@ const ParliamentPage: React.FC = () => {
   // Get districts for filter
   const districts = useMemo(() => {
     return parliament.CirculosEleitorais.sort((a, b) =>
-      a.cpDes.localeCompare(b.cpDes)
+      a.cpDes.localeCompare(b.cpDes),
     );
   }, [parliament.CirculosEleitorais]);
 
   // Generate chart data
   const partyChartData = useMemo(() => {
     const colors = [
-      "#FF6B6B",
-      "#4ECDC4",
-      "#45B7D1",
-      "#96CEB4",
-      "#FFEEAD",
-      "#D4A5A5",
-      "#9B59B6",
-      "#3498DB",
-      "#E67E22",
-      "#2ECC71",
+      '#FF6B6B',
+      '#4ECDC4',
+      '#45B7D1',
+      '#96CEB4',
+      '#FFEEAD',
+      '#D4A5A5',
+      '#9B59B6',
+      '#3498DB',
+      '#E67E22',
+      '#2ECC71',
     ];
 
     return Object.entries(metadata.totalByParty).map(
@@ -73,7 +73,7 @@ const ParliamentPage: React.FC = () => {
         title: party,
         value: count,
         color: colors[index % colors.length],
-      })
+      }),
     );
   }, [metadata.totalByParty]);
 
@@ -87,7 +87,7 @@ const ParliamentPage: React.FC = () => {
           <p>
             {error instanceof Error
               ? error.message
-              : "An unexpected error occurred"}
+              : 'An unexpected error occurred'}
           </p>
         </div>
       </div>
@@ -104,7 +104,7 @@ const ParliamentPage: React.FC = () => {
             variant="neutral"
             onClick={() => setLeftSidebarExpanded(!leftSidebarExpanded)}
           >
-            <span className={`${!leftSidebarExpanded && "rotate-180"}`}>
+            <span className={`${!leftSidebarExpanded && 'rotate-180'}`}>
               <ChevronBack />
             </span>
           </Button>

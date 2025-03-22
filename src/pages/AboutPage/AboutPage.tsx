@@ -1,12 +1,12 @@
-import Button from '@/components/ui/Button/Button';
-import ChevronBack from '@/components/ui/Icons/ChevronBack';
-import { useAppSettingsStore } from '@store/useAppSettingsStore';
-import Markdown from 'react-markdown';
-import { Link } from 'react-router-dom';
-import remarkGfm from 'remark-gfm';
-import LeftSidebar from './LeftSidebar/LeftSidebar';
-import './AboutPage.css';
-import aboutPtMd from './about-pt.md';
+import Button from "@/components/ui/Button/Button";
+import ChevronBack from "@/components/ui/Icons/ChevronBack";
+import CommonSidebar from "@/components/ui/Sidebar/CommonSidebar";
+import { useAppSettingsStore } from "@store/useAppSettingsStore";
+import Markdown from "react-markdown";
+import { Link } from "react-router-dom";
+import remarkGfm from "remark-gfm";
+import "./AboutPage.css";
+import aboutPtMd from "./about-pt.md";
 
 // TODO: Needs implementation
 
@@ -15,7 +15,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="flex flex-row w-full h-full">
-      <LeftSidebar />
+      <CommonSidebar />
 
       <div className="w-full flex flex-col">
         <nav className="flex flex-row gap-2 py-2-5 px-3 justify-between">
@@ -23,7 +23,7 @@ const AboutPage: React.FC = () => {
             variant="neutral"
             onClick={() => setLeftSidebarExpanded(!leftSidebarExpanded)}
           >
-            <span className={`${!leftSidebarExpanded && 'rotate-180'}`}>
+            <span className={`${!leftSidebarExpanded && "rotate-180"}`}>
               <ChevronBack />
             </span>
           </Button>

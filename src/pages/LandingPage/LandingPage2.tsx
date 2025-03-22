@@ -4,13 +4,12 @@ import KeyMetrics from '@/components/KeyMetrics';
 import MainNav from '@/components/MainNav';
 import PerformanceCard from '@/components/PerformanceCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@radix-ui/themes';
+import { Button } from '@radix-ui/themes/components/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BarChart3, Flag, GanttChart, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-const LandingPage = () => {
+const Index = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -233,11 +232,9 @@ const LandingPage = () => {
                     data, enhance civic participation, and ensure data
                     transparency in Portuguese governance.
                   </p>
-                  <Link to="/about">
-                    <Button className="rounded-full h-12 px-8 bg-neutral-900 hover:bg-neutral-800 transition-all duration-300">
-                      Learn About Our Methodology
-                    </Button>
-                  </Link>
+                  <Button className="rounded-full h-12 px-8 bg-neutral-900 hover:bg-neutral-800 transition-all duration-300">
+                    Learn About Our Methodology
+                  </Button>
                 </div>
               </div>
             </motion.section>
@@ -250,4 +247,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Index;

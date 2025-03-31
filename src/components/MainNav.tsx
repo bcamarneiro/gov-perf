@@ -40,12 +40,6 @@ const MainNav: React.FC<MainNavProps> = ({ scrollY }) => {
             >
               Parliament
             </Link>
-            <Link
-              to="/docs"
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-            >
-              Docs
-            </Link>
           </nav>
         </div>
       </div>

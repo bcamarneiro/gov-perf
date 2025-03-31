@@ -2,11 +2,10 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import KeyMetrics from '@/components/KeyMetrics';
 import MainNav from '@/components/MainNav';
-import PerformanceCard from '@/components/PerformanceCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@radix-ui/themes';
 import { AnimatePresence, motion } from 'framer-motion';
-import { BarChart3, Flag, GanttChart, TrendingUp } from 'lucide-react';
+import { BarChart3, Flag } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -41,43 +40,8 @@ const LandingPage = () => {
     }),
   };
 
-  const sectors = [
-    {
-      name: 'Economy',
-      icon: <TrendingUp className="h-5 w-5" />,
-      score: 67,
-      trend: 'up' as const,
-      description:
-        'GDP growth, debt management, and fiscal policy implementation',
-    },
-    {
-      name: 'Healthcare',
-      icon: <BarChart3 className="h-5 w-5" />,
-      score: 72,
-      trend: 'up' as const,
-      description:
-        'Public health response, hospital capacity, and healthcare access',
-    },
-    {
-      name: 'Education',
-      icon: <GanttChart className="h-5 w-5" />,
-      score: 58,
-      trend: 'down' as const,
-      description:
-        'Educational outcomes, school investment, and teacher resources',
-    },
-    {
-      name: 'Infrastructure',
-      icon: <Flag className="h-5 w-5" />,
-      score: 61,
-      trend: 'neutral' as const,
-      description:
-        'Public works, transportation systems, and digital infrastructure',
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <MainNav scrollY={scrollY} />
 
       <AnimatePresence>
@@ -86,14 +50,14 @@ const LandingPage = () => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="flex flex-col"
+            className="flex flex-col overflow-x-hidden"
           >
             <Hero />
 
             <motion.section
               variants={fadeInUp}
               custom={1}
-              className="container px-6 md:px-8 py-16 md:py-24"
+              className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 py-16 md:py-24"
             >
               <motion.div className="max-w-2xl mx-auto text-center mb-16 md:mb-24">
                 <motion.span
@@ -156,25 +120,6 @@ const LandingPage = () => {
                   </div>
 
                   <TabsContent
-                    value="sectors"
-                    className="focus-visible:outline-none"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {sectors.map((sector, index) => (
-                        <PerformanceCard
-                          key={sector.name}
-                          title={sector.name}
-                          icon={sector.icon}
-                          score={sector.score}
-                          trend={sector.trend}
-                          description={sector.description}
-                          delay={index * 0.1}
-                        />
-                      ))}
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent
                     value="timeline"
                     className="focus-visible:outline-none"
                   >
@@ -218,9 +163,9 @@ const LandingPage = () => {
             <motion.section
               variants={fadeInUp}
               custom={9}
-              className="bg-neutral-50 py-16 md:py-24"
+              className="bg-neutral-50 py-16 md:py-24 w-full"
             >
-              <div className="container px-6 md:px-8">
+              <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
                 <div className="max-w-xl mx-auto text-center">
                   <span className="inline-block text-sm tracking-wide uppercase bg-white px-3 py-1 rounded-full mb-3 font-medium text-neutral-600">
                     Project Goals

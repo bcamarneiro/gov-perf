@@ -4,33 +4,26 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section className="relative h-[90vh] flex items-center justify-center bg-neutral-50">
-      <div className="container px-6 md:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-light mb-6 tracking-tight"
-          >
+      <div className="absolute inset-0">
+        <img
+          src="/public/images/hero-bg.webp"
+          alt="Portuguese Parliament"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-white/60" />
+      </div>
+      <div className="container px-6 md:px-8 z-10">
+        <div className=" max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-medium mb-6 tracking-tight text-neutral-900">
             Tracking Parliamentary Performance
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-neutral-600 mb-8 leading-relaxed"
-          >
+          <p className="text-lg md:text-xl text-neutral-800 mb-8 leading-relaxed font-medium">
             A comprehensive platform for monitoring and analyzing parliamentary
             activities, making governance data accessible to everyone.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-4 justify-center"
-          >
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link
               to="/initiatives"
               className="inline-flex h-12 items-center justify-center rounded-full bg-neutral-900 px-8 text-sm font-medium text-white hover:bg-neutral-800 transition-colors"
@@ -43,7 +36,7 @@ const Hero = () => {
             >
               Explore Parliament
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

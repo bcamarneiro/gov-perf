@@ -11,7 +11,7 @@ type ParliamentMetadata = {
 
 export const useParliament = () => {
   const fetchParliament = useCallback(async (): Promise<ParliamentData> => {
-    const response = await fetch('/data/XVI/base/base-data.json');
+    const response = await fetch(import.meta.env.VITE_BASE_INFO_URL);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch parliament data: ${response.status}`);

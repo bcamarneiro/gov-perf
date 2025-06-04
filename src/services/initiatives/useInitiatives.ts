@@ -37,7 +37,7 @@ type InitiativesListMetadata = {
 
 export const useInitiatives = () => {
   const fetchInitiatives = useCallback(async (): Promise<Initiative[]> => {
-    const response = await fetch('/data/XVI/initiatives/1740776147080.json');
+    const response = await fetch(import.meta.env.VITE_INITIATIVES_URL);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch initiatives: ${response.status}`);
